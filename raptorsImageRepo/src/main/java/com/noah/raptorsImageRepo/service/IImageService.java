@@ -4,7 +4,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.noah.raptorsImageRepo.dto.ImageDTO;
 
-public interface IRaptorsImageRepoService {
+public interface IImageService {
 	
 	void saveImage(MultipartFile imageFile, ImageDTO imageDTO) throws Exception;
 	

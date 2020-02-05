@@ -12,7 +12,7 @@ import com.noah.raptorsImageRepo.dao.IImageDAO;
 import com.noah.raptorsImageRepo.dto.ImageDTO;
 
 @Component
-public class RaptorsImageRepoService implements IRaptorsImageRepoService {
+public class ImageService implements IImageService {
 	
 	@Autowired
 	IImageDAO imageDAO;
