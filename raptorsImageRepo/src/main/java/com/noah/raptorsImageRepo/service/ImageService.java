@@ -32,5 +32,10 @@ public class ImageService implements IImageService {
 		imageDTO.setPath(photosDir);
 		imageDAO.save(imageDTO);
 	}
+	
+	@Override
+	public Iterable<ImageDTO> fetchAllImages() throws Exception {
+		return imageDAO.fetchAll();
+	}
 
 }

@@ -18,4 +18,9 @@ public class ImageDAO implements IImageDAO {
 		return false;
 	}
 	
+	@Override
+	public Iterable<ImageDTO> fetchAll() throws Exception {
+		return imageRepository.findAll();
+	}
+	
 }
