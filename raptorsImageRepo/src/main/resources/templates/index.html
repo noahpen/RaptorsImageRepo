@@ -5,8 +5,11 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Raptors Image Repository</title>
-<link rel="stylesheet"
-	th:href="@{webjars/bootstrap/4.2.1/css/bootstrap.min.css}" />
+<!-- <link rel="stylesheet" th:href="@{webjars/bootstrap/4.2.1/css/bootstrap.min.css}" /> -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <link href="../static/css/Layout.css" th:href="@{/css/style.css}" rel="stylesheet" />
 </head>
 <body>
@@ -42,7 +45,7 @@
 						class="mr-2" viewBox="0 0 24 24" focusable="false">
 						<path
 							d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
-						<circle cx="12" cy="13" r="4" /></svg> <strong>Album</strong>
+						<circle cx="12" cy="13" r="4" /></svg> <strong>Toronto Raptors</strong>
 				</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse"
 					data-target="#navbarHeader" aria-controls="navbarHeader"
@@ -91,10 +94,18 @@
 								<p class="card-text" th:text="${imageData.caption}"></p>
 								<div class="d-flex justify-content-between align-items-center">
 									<div class="btn-group">
-										<button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-										<button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+										<button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" th:attr="data-target='#modal' + ${imageData.imageId}" >View</button>
+										<button type="button" class="btn btn-sm btn-outline-secondary">Delete</button>
 									</div>
 									<small class="text-muted">9 mins</small>
+									<!-- The Modal -->
+									<div class="modal fade" th:id="'modal' + ${imageData.imageId}">
+										<div class="modal-dialog modal-lg">
+											<div class="modal-content">	
+												<img th:src="@{${'/photos/' + imageData.fileName}}" width="100%"/>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -117,5 +128,15 @@
 	</footer>
 	<script type="text/javascript"
 		th:src="@{webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
+<!-- 	<script th:src="@{/scripts/script.js}"></script> -->
+	<script th:src="|$scripts/main.js|"></script>
+	<script>
+		$(function() {
+			$('.pop').on('click', function() {
+				$('.imagepreview').attr('src', $(this).find('img').attr('src'));
+				$('#imagemodal').modal('show');   
+			});		
+		});
+	</script>
 </body>
 </html>
