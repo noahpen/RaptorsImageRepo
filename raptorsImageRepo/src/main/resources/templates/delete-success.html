@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Raptors Image Repository</title>
+	<!-- <link rel="stylesheet" th:href="@{webjars/bootstrap/4.2.1/css/bootstrap.min.css}" /> -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<link href="../static/css/Layout.css" th:href="@{/css/style.css}" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+	<link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+	<header>
+		<div th:replace="fragments/fragment :: navbar"></div>
+	</header>
+
+	<main role="main">
+		<div th:replace="fragments/fragment :: jumbotron"></div>
+		<div>
+			<h3 class="text-center">Delete Successful!</h3></br>
+			<div class="row justify-content-center">
+				<a href="/" class="btn btn-info" role="button">Back to home</a>
+			</div>
+		</div> 
+	</main>
+	<div th:replace="fragments/fragment :: footer"></div>
+	<script type="text/javascript"
+		th:src="@{webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
+</body>
+</html>
