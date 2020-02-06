@@ -4,7 +4,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.noah.raptorsImageRepo.dto.ImageDTO;
-import com.noah.raptorsImageRepo.service.IRaptorsImageRepoService;
+import com.noah.raptorsImageRepo.service.IImageService;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,29 +21,44 @@ public class MainController {
 	protected static final Logger log = LogManager.getLogger(MainController.class);
 	
 	@Autowired
-	private IRaptorsImageRepoService raptorsImageRepoService;
+	private IImageService imageService;
 	
-	@RequestMapping("/index") 
-	public String index() {
-		// Returns index.html via thymeleaf
-		return "redirect:/index"; 
-	}
+//	@RequestMapping("/index") 
+//	public String index() {
+//		// Returns index.html via thymeleaf
+//		return "redirect:/index"; 
+//	}
 
 	@RequestMapping(method=RequestMethod.POST, value="/upload-image")
 	public ModelAndView uploadImage(@ModelAttribute("imageDTO") ImageDTO imageDTO, @RequestParam("image") MultipartFile imageFile) {
 		ModelAndView modelAndView = new ModelAndView();
 		imageDTO.setFileName(imageFile.getOriginalFilename());
 		try {
-			raptorsImageRepoService.saveImage(imageFile, imageDTO);
+			imageService.saveImage(imageFile, imageDTO);
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.error("Image failed to save...", e);
 			modelAndView.setViewName("error");
 			return modelAndView;
 		}
-		
 		modelAndView.setViewName("index");
 		modelAndView.addObject("imageDTO", imageDTO);
+		return modelAndView;
+	}
+	
+	@RequestMapping("/")
+	public ModelAndView getImages() {
+		ModelAndView modelAndView = new ModelAndView();
+		try {
+			Iterable<ImageDTO> allImages = imageService.fetchAllImages();
+			modelAndView.setViewName("index");
+			modelAndView.addObject("allImages", allImages);
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.error("Failed to retrieve image and data...", e);
+			modelAndView.setViewName("error");
+			return modelAndView;
+		}
 		return modelAndView;
 	}
 	
