@@ -32,6 +32,7 @@ public class ImageService implements IImageService {
 		if (imageFile != null) {
 			byte[] bytes = imageFile.getBytes();
 			Path path = Paths.get(photosDir + imageFile.getOriginalFilename());
+			// Write image to filesystem dir
 			Files.write(path, bytes);
 		}
 		imageDTO.setPath(photosDir);
@@ -48,12 +49,15 @@ public class ImageService implements IImageService {
 		String fileName = null;
 		List<Integer> imageIds = new ArrayList<>();
 		imageIds.add(imageId);
+		// Fetch DTO using imageId
 		Iterable<ImageDTO> imageDTOs = imageDAO.fetchByIds(imageIds);
 		for (ImageDTO imageDTO : imageDTOs) {
+			// Get fileName from fetched DTO
 			fileName = imageDTO.getFileName();
 		}
 		try {
 			String photosDir = ImageUtils.getAbsolutePath();
+			// Use path and fileName to delete image
 			File file = new File(photosDir + fileName);
 			if (file.delete()) {
 				log.debug("Image file " + fileName + " has been successfully deleted.");

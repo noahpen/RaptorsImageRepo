@@ -32,6 +32,7 @@ public class ImageDAO implements IImageDAO {
 	
 	@Override
 	public Iterable<ImageDTO> fetchByIds(List<Integer> imageIds) throws Exception {
+		// TODO Auto-generated method stub
 		return imageRepository.findAllById(imageIds);
 	}
 	

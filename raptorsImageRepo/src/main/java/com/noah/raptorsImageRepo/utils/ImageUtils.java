@@ -5,6 +5,7 @@ import java.nio.file.Paths;
 
 public class ImageUtils {
 
+	// Returns absolute path of where images are stored
 	public static String getAbsolutePath() {
 		// Current path
 		Path currPath = Paths.get(".");

@@ -23,7 +23,8 @@ public class MainController {
 	
 	@Autowired
 	private IImageService imageService;
-
+	
+	// Fetches all image data from db on every load of the root page
 	@RequestMapping("/")
 	public ModelAndView getImages() {
 		ModelAndView modelAndView = new ModelAndView();
@@ -40,6 +41,7 @@ public class MainController {
 		return modelAndView;
 	}
 	
+	// Multipart image file and image data sent from client via POST
 	@RequestMapping(method=RequestMethod.POST, value="/upload-image")
 	public ModelAndView uploadImage(@ModelAttribute("imageDTO") ImageDTO imageDTO, @RequestParam("image") MultipartFile imageFile) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -57,6 +59,7 @@ public class MainController {
 		return modelAndView;
 	}
 	
+	// Image is deleted via GET with imageId param
 	@RequestMapping("/delete-image/{imageId}") 
 	public ModelAndView deleteImage(@PathVariable("imageId") int imageId) {
 		ModelAndView modelAndView = new ModelAndView();
