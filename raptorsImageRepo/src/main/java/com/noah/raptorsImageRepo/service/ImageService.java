@@ -37,5 +37,10 @@ public class ImageService implements IImageService {
 	public Iterable<ImageDTO> fetchAllImages() throws Exception {
 		return imageDAO.fetchAll();
 	}
+	
+	@Override
+	public void deleteImage(int imageId) throws Exception {
+		imageDAO.delete(imageId);
+	}
 
 }

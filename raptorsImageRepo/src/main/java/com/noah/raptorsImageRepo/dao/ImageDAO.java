@@ -12,15 +12,21 @@ public class ImageDAO implements IImageDAO {
 	ImageRepository imageRepository;
 
 	@Override
-	public boolean save(ImageDTO imageDTO) throws Exception {
+	public void save(ImageDTO imageDTO) throws Exception {
 		// TODO Auto-generated method stub
 		imageRepository.save(imageDTO);
-		return false;
 	}
 	
 	@Override
 	public Iterable<ImageDTO> fetchAll() throws Exception {
+		// TODO Auto-generated method stub
 		return imageRepository.findAll();
+	}
+	
+	@Override
+	public void delete(int imageId) throws Exception {
+		// TODO Auto-generated method stub
+		imageRepository.deleteById(imageId);
 	}
 	
 }

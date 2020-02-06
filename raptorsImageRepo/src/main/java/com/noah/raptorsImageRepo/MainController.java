@@ -11,6 +11,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -53,6 +54,21 @@ public class MainController {
 		}
 		modelAndView.setViewName("index");
 		modelAndView.addObject("imageDTO", imageDTO);
+		return modelAndView;
+	}
+	
+	@RequestMapping("/delete-image/{imageId}") 
+	public ModelAndView deleteImage(@PathVariable("imageId") int imageId) {
+		ModelAndView modelAndView = new ModelAndView();
+		try {
+			imageService.deleteImage(imageId);
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.error("Image failed to delete...", e);
+			modelAndView.setViewName("error");
+			return modelAndView;
+		}
+		modelAndView.setViewName("index");
 		return modelAndView;
 	}
 	

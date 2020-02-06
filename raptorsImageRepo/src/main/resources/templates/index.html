@@ -90,11 +90,14 @@
 						<div class="card mb-4 shadow-sm">
 							<img th:src="@{${'/photos/' + imageData.fileName}}" width="100%" height="225" />
 							<div class="card-body">
-								<p class="card-text" th:text="${imageData.caption}"></p>
+								<p class="card-text" th:text="${imageData.title} + ': ' + ${imageData.caption}"></p>
 								<div class="d-flex justify-content-between align-items-center">
 									<div class="btn-group">
 										<button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" th:attr="data-target='#modal' + ${imageData.imageId}" >View</button>
-										<button type="button" class="btn btn-sm btn-outline-secondary">Delete</button>
+										<form method="post" enctype="multipart/form-data" th:action="@{/delete-image/{imageId}(imageId=${imageData.imageId})}">
+											<button type="submit" class="btn btn-sm btn-outline-secondary">Delete</button>
+										</form>
+										
 									</div>
 <!-- 									<small class="text-muted">9 mins</small> -->
 									<!-- The Modal -->

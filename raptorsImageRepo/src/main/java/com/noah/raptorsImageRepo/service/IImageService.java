@@ -9,5 +9,7 @@ public interface IImageService {
 	void saveImage(MultipartFile imageFile, ImageDTO imageDTO) throws Exception;
 
 	Iterable<ImageDTO> fetchAllImages() throws Exception;
+
+	void deleteImage(int imageId) throws Exception;
 	
 }
