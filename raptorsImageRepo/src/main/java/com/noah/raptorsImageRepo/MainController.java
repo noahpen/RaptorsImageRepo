@@ -52,7 +52,7 @@ public class MainController {
 			modelAndView.setViewName("error");
 			return modelAndView;
 		}
-		modelAndView.setViewName("index");
+		modelAndView.setViewName("upload-success");
 		modelAndView.addObject("imageDTO", imageDTO);
 		return modelAndView;
 	}
@@ -68,7 +68,7 @@ public class MainController {
 			modelAndView.setViewName("error");
 			return modelAndView;
 		}
-		modelAndView.setViewName("index");
+		modelAndView.setViewName("delete-success");
 		return modelAndView;
 	}
 	
