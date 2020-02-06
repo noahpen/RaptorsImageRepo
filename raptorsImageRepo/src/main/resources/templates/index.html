@@ -1,92 +1,30 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Raptors Image Repository</title>
-<!-- <link rel="stylesheet" th:href="@{webjars/bootstrap/4.2.1/css/bootstrap.min.css}" /> -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-<link href="../static/css/Layout.css" th:href="@{/css/style.css}" rel="stylesheet" />
-<link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+	<meta charset="utf-8">
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Raptors Image Repository</title>
+	<!-- <link rel="stylesheet" th:href="@{webjars/bootstrap/4.2.1/css/bootstrap.min.css}" /> -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+	<link href="../static/css/Layout.css" th:href="@{/css/style.css}" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+	<link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
 	<header>
-		<div class="collapse bg-dark" id="navbarHeader">
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-8 col-md-7 py-4">
-						<h4 class="text-white">About</h4>
-						<p class="text-white">This web application is for the Summer 2020 Developer Intern Challenge Question task: 
-						'Build an image repository.' If it wasn't obvious...yes I'm a Raptors fan.</p>
-					</div>
-					<div class="col-sm-4 offset-md-1 py-4">
-						<h4 class="text-white">Contact</h4>
-						<ul class="list-unstyled">
-							<li><a href="https://www.nba.com/raptors/" class="text-white" target="_blank">Toronto Raptors Official Site</a></li>
-							<li><a href="https://www.raptorshq.com/" class="text-white" target="_blank">Raptors Community News</a></li>
-							<li><a href="https://www.reddit.com/r/torontoraptors/" class="text-white" target="_blank">Toronto Raptors Subreddit</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="navbar navbar-dark bg-dark shadow-sm">
-			<div class="container d-flex justify-content-between">
-				<a href="#" class="navbar-brand d-flex align-items-center"> <svg
-						xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-						fill="none" stroke="currentColor" stroke-linecap="round"
-						stroke-linejoin="round" stroke-width="2" aria-hidden="true"
-						class="mr-2" viewBox="0 0 24 24" focusable="false">
-						<path
-							d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
-						<circle cx="12" cy="13" r="4" /></svg> <strong>Toronto Raptors</strong>
-				</a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse"
-					data-target="#navbarHeader" aria-controls="navbarHeader"
-					aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-			</div>
-		</div>
+		<div th:replace="fragments/fragment :: navbar"></div>
 	</header>
 
 	<main role="main">
-
-		<section class="jumbotron text-center">
-			<div class="container">
-				<h1>Raptors Image Repository</h1>
-				<h4>Welcome to your personal collection of your favourite Raptors players & moments!</h4></br>
-				<h5>Enter a title & caption:</h5>
-				<form method="post" enctype="multipart/form-data" onsubmit="window.location.reload();" th:object="${imageDTO}" th:action="@{/upload-image}">
-					<div class="input-group mb-3">
-  						<div class="input-group-prepend">
-    						<span class="input-group-text" id="inputGroup-sizing-sm">Enter an image title: </span>
-  						</div>
-						<input type="text" class="form-control" name="title"> 
-					</div>
-					<div class="input-group mb-3">
-  						<div class="input-group-prepend">
-    						<span class="input-group-text" id="inputGroup-sizing-sm">Enter an image caption: </span>
-  						</div>
-  						<input type="text" class="form-control" name="caption"> 
-					</div>
-					<h5>Upload an image:</h5>
-					<input type="file" name="image" class="btn btn-secondary my-2"/>
-					<input type="submit" value="Upload" class="btn btn-primary my-2">
-				</form>
-			</div>
-		</section>
-
+		<div th:replace="fragments/fragment :: jumbotron"></div>
 		<div class="album py-5 bg-light">
 			<div class="container">
-
 				<div class="row">
 					<div class="col-md-4" th:each="imageData : ${allImages}">
-					
 						<div class="card mb-4 shadow-sm">
 							<img th:src="@{${'/photos/' + imageData.fileName}}" width="100%" height="225" />
 							<div class="card-body">
@@ -115,30 +53,8 @@
 				</div>
 			</div>
 		</div>
-
 	</main>
-
-	<footer class="text-muted">
-		<div class="container">
-			<p class="float-right">
-				<a href="#">Back to top</a>
-			</p>
-			<br/>
-			<p>&copy; Noah Peneycad</p>
-			<p>Shopify 2020 Developer Intern Challenge Question</p>
-		</div>
-	</footer>
-	<script type="text/javascript"
-		th:src="@{webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
-<!-- 	<script th:src="@{/scripts/script.js}"></script> -->
-	<script th:src="|$scripts/main.js|"></script>
-	<script>
-		$(function() {
-			$('.pop').on('click', function() {
-				$('.imagepreview').attr('src', $(this).find('img').attr('src'));
-				$('#imagemodal').modal('show');   
-			});		
-		});
-	</script>
+	<div th:replace="fragments/fragment :: footer"></div>
+	<script type="text/javascript" th:src="@{webjars/bootstrap/4.2.1/js/bootstrap.min.js}"></script>
 </body>
 </html>
