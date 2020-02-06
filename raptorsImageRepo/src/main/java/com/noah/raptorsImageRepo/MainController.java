@@ -22,13 +22,23 @@ public class MainController {
 	
 	@Autowired
 	private IImageService imageService;
-	
-//	@RequestMapping("/index") 
-//	public String index() {
-//		// Returns index.html via thymeleaf
-//		return "redirect:/index"; 
-//	}
 
+	@RequestMapping("/")
+	public ModelAndView getImages() {
+		ModelAndView modelAndView = new ModelAndView();
+		try {
+			Iterable<ImageDTO> allImages = imageService.fetchAllImages();
+			modelAndView.setViewName("index");
+			modelAndView.addObject("allImages", allImages);
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.error("Failed to retrieve image and data...", e);
+			modelAndView.setViewName("error");
+			return modelAndView;
+		}
+		return modelAndView;
+	}
+	
 	@RequestMapping(method=RequestMethod.POST, value="/upload-image")
 	public ModelAndView uploadImage(@ModelAttribute("imageDTO") ImageDTO imageDTO, @RequestParam("image") MultipartFile imageFile) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -43,22 +53,6 @@ public class MainController {
 		}
 		modelAndView.setViewName("index");
 		modelAndView.addObject("imageDTO", imageDTO);
-		return modelAndView;
-	}
-	
-	@RequestMapping("/")
-	public ModelAndView getImages() {
-		ModelAndView modelAndView = new ModelAndView();
-		try {
-			Iterable<ImageDTO> allImages = imageService.fetchAllImages();
-			modelAndView.setViewName("index");
-			modelAndView.addObject("allImages", allImages);
-		} catch (Exception e) {
-			e.printStackTrace();
-			log.error("Failed to retrieve image and data...", e);
-			modelAndView.setViewName("error");
-			return modelAndView;
-		}
 		return modelAndView;
 	}
 	

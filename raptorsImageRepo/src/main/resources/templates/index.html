@@ -11,6 +11,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <link href="../static/css/Layout.css" th:href="@{/css/style.css}" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
 </head>
 <body>
 	<header>
@@ -19,18 +20,15 @@
 				<div class="row">
 					<div class="col-sm-8 col-md-7 py-4">
 						<h4 class="text-white">About</h4>
-						<p class="text-muted">Add some information about the album
-							below, the author, or any other background context. Make it a few
-							sentences long so folks can pick up some informative tidbits.
-							Then, link them off to some social networking sites or contact
-							information.</p>
+						<p class="text-white">This web application is for the Summer 2020 Developer Intern Challenge Question task: 
+						'Build an image repository.' If it wasn't obvious...yes I'm a Raptors fan.</p>
 					</div>
 					<div class="col-sm-4 offset-md-1 py-4">
 						<h4 class="text-white">Contact</h4>
 						<ul class="list-unstyled">
-							<li><a href="#" class="text-white">Follow on Twitter</a></li>
-							<li><a href="#" class="text-white">Like on Facebook</a></li>
-							<li><a href="#" class="text-white">Email me</a></li>
+							<li><a href="https://www.nba.com/raptors/" class="text-white" target="_blank">Toronto Raptors Official Site</a></li>
+							<li><a href="https://www.raptorshq.com/" class="text-white" target="_blank">Raptors Community News</a></li>
+							<li><a href="https://www.reddit.com/r/torontoraptors/" class="text-white" target="_blank">Toronto Raptors Subreddit</a></li>
 						</ul>
 					</div>
 				</div>
@@ -62,20 +60,21 @@
 			<div class="container">
 				<h1>Raptors Image Repository</h1>
 				<h4>Welcome to your personal collection of your favourite Raptors players & moments!</h4></br>
-				<h5>Upload an image:</h5></br>
+				<h5>Enter a title & caption:</h5>
 				<form method="post" enctype="multipart/form-data" onsubmit="window.location.reload();" th:object="${imageDTO}" th:action="@{/upload-image}">
-					<div class="input-group input-group-sm mb-3">
+					<div class="input-group mb-3">
   						<div class="input-group-prepend">
     						<span class="input-group-text" id="inputGroup-sizing-sm">Enter an image title: </span>
   						</div>
 						<input type="text" class="form-control" name="title"> 
 					</div>
-					<div class="input-group input-group-sm mb-3">
+					<div class="input-group mb-3">
   						<div class="input-group-prepend">
     						<span class="input-group-text" id="inputGroup-sizing-sm">Enter an image caption: </span>
   						</div>
   						<input type="text" class="form-control" name="caption"> 
 					</div>
+					<h5>Upload an image:</h5>
 					<input type="file" name="image" class="btn btn-secondary my-2"/>
 					<input type="submit" value="Upload" class="btn btn-primary my-2">
 				</form>
@@ -97,7 +96,7 @@
 										<button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" th:attr="data-target='#modal' + ${imageData.imageId}" >View</button>
 										<button type="button" class="btn btn-sm btn-outline-secondary">Delete</button>
 									</div>
-									<small class="text-muted">9 mins</small>
+<!-- 									<small class="text-muted">9 mins</small> -->
 									<!-- The Modal -->
 									<div class="modal fade" th:id="'modal' + ${imageData.imageId}">
 										<div class="modal-dialog modal-lg">
